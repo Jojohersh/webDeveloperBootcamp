@@ -1,3 +1,4 @@
+$("input[type='text']").fadeToggle(0);
 // click off todos by clicking
 $("ul").on("click", "li", function() {
 	$(this).toggleClass("completed");
@@ -22,5 +23,5 @@ $("input[type='text']").keypress(function(e){
 });
 
 $(".fa-pencil-square").click(function() {
-	$("input[type='text']").fadeToggle(250);
+	$("input[type='text']").fadeToggle(200);
 });
