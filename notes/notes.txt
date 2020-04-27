@@ -1,3 +1,8 @@
+body-parser:
+bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({extended:true});
+req.body.WHATEVER
+
 Mongo:
 "show dbs" shows the available dbs in mongo
 "use *db*" switches current db in use to *db*
@@ -6,6 +11,12 @@ Mongo:
 "db.collection.drop()" destroys everything in a collection
 
 mongoose:
+
+deprecation fixes:
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useUnifiedTopology', true);
+mongoose.set('useFindAndModify', false);
+
 mongoose.connect("mongodb://ADDRESSS/APPNAME");
 
 var newScema = new mongoose.Schema({
@@ -38,3 +49,9 @@ Show   | /dogs/:id     |  GET         | Show info about one specific dog
 Edit   | /dogs/:id/edit|  GET         | Show edit for for one dog
 Update | /dogs/:id     |  PUT         | Update a particular dog, then redirect somewhere
 Destroy| /dogs/:id     |  DELETE      | Delete a particular dog, then redirect somewhere
+
+
+method-override:
+methodOverride = require("method-override")
+app.use(methodOverride("_method"))
+form action="/ROUTE/:IDVAL/?_method=PUT"
