@@ -22,13 +22,22 @@ mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
 mongoose.set('useFindAndModify', false);
 
+// use deleteOne or deleteMany in place of remove()
+
 mongoose.connect("mongodb://ADDRESSS/APPNAME");
 
 var newScema = new mongoose.Schema({
 	var: Type,
 	var: Type,
 	var: Type
+	var: {
+		type: mongoose.Schema.Type.ObjectId,
+		ref: ""
+	}
 }
+
+//to render items that are by id...
+Model.findById(Id).populate("VariableToPopulate").exec(callback(err,returnedData));
 
 var Entry = mongoose.model("Entry Name(in singular form)", newSchema);
 
