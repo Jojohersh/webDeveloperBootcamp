@@ -87,6 +87,13 @@ app.js
 
 	passport.serializeUser(User.serializeUser());
 	passport.deserializeUser(User.deserializeUser());
+	
+	//TO USE THE USER IN EVER PAGE (E.G. CHECKING THE NAV BAR
+	app.use((req,res,next)=>{
+		res.locals.currentUser = req.user;
+		next();
+	});
+
     register logic:	
 	registers a new user with a username to store, hashing the password but not storing it. then authenticates the new user, and takes them to secret userland
 	app.post("/register", (req,res)->{	
