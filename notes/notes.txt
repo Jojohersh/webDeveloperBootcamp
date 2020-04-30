@@ -69,3 +69,52 @@ methodOverride = require("method-override")
 app.use(methodOverride("_method"))
 form action="/ROUTE/:IDVAL/?_method=PUT"
 
+Authentication:
+user.js:
+	req mongoose, passport-local-mongoose
+	userSchema.plugin(passportLocalMongoose);
+
+app.js
+	req express, mongoose, passport, body-parser, passport-local, passport-local-mongoose
+	app=express();
+	app.use(require("express-session")({
+		secret: "String of words to encrypt & decrypt sessions",
+		resave: false,
+		saveUninitialized: false
+	}));
+	app.use(passport.initialize());
+	app.use(passport.session());
+
+	passport.serializeUser(User.serializeUser());
+	passport.deserializeUser(User.deserializeUser());
+    register logic:	
+	registers a new user with a username to store, hashing the password but not storing it. then authenticates the new user, and takes them to secret userland
+	app.post("/register", (req,res)->{	
+		User.register(new User({username:req.body.username}), req.body.password, (err, user)=>{
+			if(err){...} blah blah blah
+			passport.authenticate("local")(req,res,()=>{
+				res.redirect("/SOME/WHERE/");
+			});
+		});
+	});
+    login logic:
+	// runs passport.authenticate as middleware and redirects if the login is correct or wrong
+	app.post("/login",passport.authenticate("local", {
+		successRedirect: "/Secret/User/Place",
+		failureRedirect: "/login"
+	}), (req,res)=>{
+	});
+
+    secret place when logged in logic:
+	//define middleware auth check
+	function isLoggedIn(req,res,next) {
+		if(req.isAuthenticated()) {
+			// continue to the route callback funtion...
+			return next();
+		}
+		res.redirect("/login");
+	}
+	
+	app.get("/secret", isLoggedIn, (req,res)=>{
+		res.render("secret");
+	});
