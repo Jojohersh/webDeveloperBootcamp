@@ -65,9 +65,10 @@ Update | /dogs/:id     |  PUT         | Update a particular dog, then redirect s
 Destroy| /dogs/:id     |  DELETE      | Delete a particular dog, then redirect somewhere|Dog.findByIdAndRemove()
 
 method-override:
-methodOverride = require("method-override")
-app.use(methodOverride("_method"))
-form action="/ROUTE/:IDVAL/?_method=PUT"
+	methodOverride = require("method-override")
+	app.use(methodOverride("_method"))
+	form action="/ROUTE/:IDVAL/?_method=PUT"
+
 
 Express Router:
 app.js
