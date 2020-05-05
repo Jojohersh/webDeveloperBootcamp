@@ -153,3 +153,10 @@ app.js
 	app.get("/secret", isLoggedIn, (req,res)=>{
 		res.render("secret");
 	});
+
+Authorization:
+	queriedObject.author.id //is a mongoose object
+	req.user._id            //is a string
+	// for validating ownership
+	if (queriedObject.author.id.equals(req.user._id))
+
